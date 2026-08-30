@@ -14,6 +14,7 @@ namespace SDRSharp.AntennaSwitch
         private readonly Label _temperature = new() { Text = "Temperatura: --.- °C", AutoSize = true };
         private readonly Label _humidity = new() { Text = "Wilgotność: --.- %", AutoSize = true };
         private readonly Label _pressure = new() { Text = "Ciśnienie: ----.- hPa", AutoSize = true };
+        private readonly Button[] _antennaButtons = new Button[4];
         private readonly Timer _timer;
 
         public AntennaSwitchPanel(ISharpControl? control)
@@ -30,11 +31,12 @@ namespace SDRSharp.AntennaSwitch
             root.Controls.Add(_status);
             root.Controls.Add(new Label { Text = "GPIO A: PE12 / pin 29", AutoSize = true });
             root.Controls.Add(new Label { Text = "GPIO B: PE13 / pin 31", AutoSize = true });
-            for (int i = 1; i <= 4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                int antenna = i;
-                var b = new Button { Text = $"ANTENA {i}", Width = 100, Enabled = false };
-                b.Click += (_, _) => _client.SendCommand($"ANTENNA {antenna}");
+                int antenna = i + 1;
+                var b = new Button { Text = $"ANTENA {antenna}", Width = 110, Enabled = false };
+                b.Click += (_, _) => SelectAntenna(antenna);
+                _antennaButtons[i] = b;
                 root.Controls.Add(b);
             }
             root.Controls.Add(new Label { Text = "POMIARY", AutoSize = true, Font = new Font(Font, FontStyle.Bold), Margin = new Padding(3, 12, 3, 3) });
@@ -46,10 +48,10 @@ namespace SDRSharp.AntennaSwitch
             _timer.Tick += (_, _) => { if (_client.IsConnected) RefreshMeasurements(); };
         }
 
-        private Control Row(string text, Control editor)
+        private static Control Row(string text, Control editor)
         {
             var p = new FlowLayoutPanel { AutoSize = true, WrapContents = false };
-            p.Controls.Add(new Label { Text = text, Width = 120, AutoSize = false });
+            p.Controls.Add(new Label { Text = text, Width = 140, AutoSize = false });
             p.Controls.Add(editor);
             return p;
         }
@@ -60,14 +62,22 @@ namespace SDRSharp.AntennaSwitch
             _client.Port = (int)_port.Value;
             bool ok = _client.Connect();
             _status.Text = ok ? "Stan: Połączono" : "Stan: Rozłączono";
+            foreach (var button in _antennaButtons) button.Enabled = ok;
             if (ok) { _timer.Start(); RefreshMeasurements(); }
             else _timer.Stop();
         }
 
+        private void SelectAntenna(int antenna)
+        {
+            // HMC7992: ANT1=00, ANT2=01, ANT3=10, ANT4=11.
+            int a = (antenna - 1) / 2;
+            int b = (antenna - 1) % 2;
+            _client.SendCommand($"GPIO A={a} B={b}");
+        }
+
         private void RefreshMeasurements()
         {
-            // Protokół pomiarów zostanie dopasowany do serwera czujnika na Orange Pi.
-            // Format oczekiwany przez GUI: TEMP, HUM, PRESS.
+            // Temperatura/wilgotność/ciśnienie pozostają na razie tylko w panelu.
         }
 
         protected override void Dispose(bool disposing)
