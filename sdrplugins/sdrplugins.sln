@@ -4,6 +4,8 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDRSharp.Empty", "Empty\SDRSharp.Empty.csproj", "{7249303D-EB57-44E6-B270-942A0D54A8AB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDRSharp.AntennaSwitch", "AntennaSwitch\SDRSharp.AntennaSwitch.csproj", "{D6C7E2A1-5D9B-4B1C-9A4F-7F6D2C8E31A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,18 +16,15 @@ Global
 		{7249303D-EB57-44E6-B270-942A0D54A8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7249303D-EB57-44E6-B270-942A0D54A8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7249303D-EB57-44E6-B270-942A0D54A8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6C7E2A1-5D9B-4B1C-9A4F-7F6D2C8E31A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6C7E2A1-5D9B-4B1C-9A4F-7F6D2C8E31A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6C7E2A1-5D9B-4B1C-9A4F-7F6D2C8E31A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6C7E2A1-5D9B-4B1C-9A4F-7F6D2C8E31A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7ECEC65D-47BE-487D-BC90-9BC261B61569}
-	EndGlobalSection
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
