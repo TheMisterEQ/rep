@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <Platforms>AnyCPU</Platforms>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>SDRSharp.AntennaSwitch</RootNamespace>
+    <AssemblyName>SDRSharp.AntennaSwitch</AssemblyName>
+    <OutputPath>..\Release\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>..\Debug\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SDRSharp.Common">
+      <Private>False</Private>
+      <HintPath>..\lib\SDRSharp.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SDRSharp.PanView">
+      <Private>False</Private>
+      <HintPath>..\lib\SDRSharp.PanView.dll</HintPath>
+    </Reference>
+    <Reference Include="SDRSharp.Radio">
+      <Private>False</Private>
+      <HintPath>..\lib\SDRSharp.Radio.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
